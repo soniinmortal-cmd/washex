@@ -1,0 +1,58 @@
+-- MySQL dump 10.13  Distrib 8.0.45, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: quickwash
+-- ------------------------------------------------------
+-- Server version	8.0.45
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `loggedoutuser`
+--
+
+DROP TABLE IF EXISTS `loggedoutuser`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `loggedoutuser` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `userId` int DEFAULT NULL,
+  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `isLoggedOut` enum('0','1') DEFAULT '0',
+  `sessionId` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `userId` (`userId`),
+  UNIQUE KEY `uq_loggedOutUser_sessionId` (`sessionId`),
+  CONSTRAINT `loggedoutuser_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `loggedoutuser`
+--
+
+LOCK TABLES `loggedoutuser` WRITE;
+/*!40000 ALTER TABLE `loggedoutuser` DISABLE KEYS */;
+INSERT INTO `loggedoutuser` VALUES (1,3,'2026-04-24 06:20:33','2026-04-29 05:13:03','1',NULL),(11,37,'2026-06-26 06:49:57','2026-07-10 05:33:24','1','355c478e-f62b-4ea0-9aea-9aca730de942'),(16,42,'2026-07-09 10:29:31','2026-07-09 10:31:32','1','7a3e99c9-431b-46d9-bf30-93c9016ac11a'),(21,45,'2026-07-14 13:00:24','2026-07-14 13:01:05','1','61a1cefe-deac-4463-ac8f-b607c7d2ec78');
+/*!40000 ALTER TABLE `loggedoutuser` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2026-08-06 16:19:29

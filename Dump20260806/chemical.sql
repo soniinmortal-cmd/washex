@@ -1,0 +1,65 @@
+-- MySQL dump 10.13  Distrib 8.0.45, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: quickwash
+-- ------------------------------------------------------
+-- Server version	8.0.45
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `chemical`
+--
+
+DROP TABLE IF EXISTS `chemical`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `chemical` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `washerId` int NOT NULL,
+  `month` int NOT NULL,
+  `year` int NOT NULL,
+  `pricePerUnit` decimal(10,3) NOT NULL,
+  `openingBalance` decimal(10,3) NOT NULL,
+  `received` decimal(10,3) NOT NULL,
+  `consumed` decimal(10,3) NOT NULL,
+  `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `chemicalId` int NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_chemical_entry` (`month`,`year`,`washerId`,`chemicalId`),
+  KEY `washerId` (`washerId`),
+  KEY `fk_chemical_list` (`chemicalId`),
+  CONSTRAINT `chemical_ibfk_1` FOREIGN KEY (`washerId`) REFERENCES `washers` (`id`),
+  CONSTRAINT `fk_chemical_list` FOREIGN KEY (`chemicalId`) REFERENCES `chemicallist` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `chemical`
+--
+
+LOCK TABLES `chemical` WRITE;
+/*!40000 ALTER TABLE `chemical` DISABLE KEYS */;
+INSERT INTO `chemical` VALUES (1,1,4,2026,64.180,100.000,50.000,120.000,'2026-04-21 11:55:53','2026-05-04 15:08:57',1),(2,2,4,2026,64.180,80.000,40.000,90.000,'2026-04-21 11:56:01','2026-05-04 15:08:57',1),(3,1,4,2026,50.000,60.000,30.000,70.000,'2026-04-21 11:56:09','2026-05-04 15:08:57',2),(4,3,5,2026,64.000,10.000,5.000,8.000,'2026-05-05 09:27:38','2026-05-05 09:27:38',1),(5,3,5,2026,50.000,20.000,10.000,15.000,'2026-05-05 09:27:38','2026-05-05 09:27:38',2),(7,2,5,2026,64.000,10.000,5.000,8.000,'2026-05-05 09:35:12','2026-05-14 07:16:46',1),(8,2,5,2026,50.000,20.000,10.000,21.000,'2026-05-05 09:35:12','2026-05-14 09:53:04',2);
+/*!40000 ALTER TABLE `chemical` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2026-08-06 16:19:31
